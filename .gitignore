@@ -14,7 +14,9 @@ env/
 .env
 !.env.example
 
-# Media Uploads (keep directory, ignore uploaded files)
+# Static Collection & Media Uploads
+backend/staticfiles/
+staticfiles/
 backend/media/*
 !backend/media/.gitkeep
 

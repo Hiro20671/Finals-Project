@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-export const API_BASE_URL = 'http://127.0.0.1:8000/api';
-export const MEDIA_BASE_URL = 'http://127.0.0.1:8000';
+const isDev = typeof window !== 'undefined' && (window.location.port === '5173' || window.location.port === '3000');
+export const API_BASE_URL = isDev ? 'http://127.0.0.1:8000/api' : `${window.location.origin}/api`;
+export const MEDIA_BASE_URL = isDev ? 'http://127.0.0.1:8000' : window.location.origin;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
