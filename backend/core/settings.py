@@ -138,10 +138,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = []
 if (BASE_DIR / 'static').exists():
     STATICFILES_DIRS.append(BASE_DIR / 'static')
-if (FRONTEND_DIST_DIR / 'assets').exists():
-    STATICFILES_DIRS.append(FRONTEND_DIST_DIR / 'assets')
+if FRONTEND_DIST_DIR.exists():
+    STATICFILES_DIRS.append(FRONTEND_DIST_DIR)
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files (Images, uploads)
 MEDIA_URL = '/media/'

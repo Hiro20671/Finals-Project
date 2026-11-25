@@ -62,11 +62,13 @@ echo "   - URL: /static/    Path: /home/$USER_NAME/Finals-Project/backend/static
 echo "   - URL: /media/     Path: /home/$USER_NAME/Finals-Project/backend/media"
 echo "6. Click your WSGI configuration file (/var/www/${USER_NAME}_pythonanywhere_com_wsgi.py) and paste:"
 echo "---------------------------------------------------------------------"
-cat << 'EOF'
+cat << EOF
 import os
 import sys
 
-path = '/home/' + os.environ.get('USER', 'YOUR_USERNAME') + '/Finals-Project/backend'
+username = '$USER_NAME'
+path = f'/home/{username}/Finals-Project/backend'
+
 if path not in sys.path:
     sys.path.insert(0, path)
 

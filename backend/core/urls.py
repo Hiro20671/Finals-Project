@@ -28,9 +28,18 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+from django.views.static import serve
+
 # Serve React Single Page Application (SPA) on non-API routes
-frontend_index = settings.BASE_DIR.parent / 'frontend' / 'dist' / 'index.html'
+frontend_dist = settings.BASE_DIR.parent / 'frontend' / 'dist'
+frontend_index = frontend_dist / 'index.html'
+
+urlpatterns += [
+    # Fallback to serve /assets/ directly if requested without /static/
+    re_path(r'^assets/(?P<path>.*)$', serve, {'document_root': frontend_dist / 'assets'}),
+]
+
 if frontend_index.exists():
     urlpatterns += [
-        re_path(r'^(?!api/|admin/|media/|static/).*$', TemplateView.as_view(template_name='index.html')),
+        re_path(r'^(?!api/|admin/|media/|static/|assets/).*$', TemplateView.as_view(template_name='index.html')),
     ]
